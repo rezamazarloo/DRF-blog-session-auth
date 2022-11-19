@@ -14,7 +14,7 @@ class Post(CreatedUpdatedFields, models.Model):
     text = models.TextField()
     isPublished = models.BooleanField(default=False, verbose_name="is published")
     publishedAt = models.DateTimeField(null=True, blank=True, default=None, verbose_name="Published at")
-    indexImage = FilerImageField(null=True, blank=True, on_delete=models.SET_NULL, related_name='index_image')
+    indexImage = FilerImageField(null=True, blank=True, on_delete=models.SET_NULL, related_name='index_image', verbose_name="Index image")
     badges = models.ManyToManyField(Badge)
     gallery = models.ManyToManyField(Image, through='ImageGallery')
     def __str__(self):
