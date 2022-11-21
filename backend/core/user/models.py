@@ -6,5 +6,5 @@ from filer.fields.image import FilerImageField
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     image = FilerImageField(null=True, blank=True, on_delete=models.SET_NULL)
-    about = models.TextField()
-    birthDate = models.DateField()
+    about = models.TextField(null=True, blank=True)
+    birthDate = models.DateField(null=True, blank=True)
