@@ -1,13 +1,15 @@
 from django.shortcuts import render
 from rest_framework.views import APIView
+from rest_framework.generics import ListAPIView, RetrieveAPIView
 from rest_framework.response import Response
 from rest_framework import status
-from django.contrib.auth.decorators import login_required
-from django.contrib.auth.models import Group, User
-from django.contrib.auth.mixins import LoginRequiredMixin 
+from .permissions import AuthorUserMixin
+from .serializers import ProfileSerializer
+from .models import Profile
 
-# Create your views here.
-class AuthorProfileAPI(LoginRequiredMixin, APIView):
-    def put(self, request, *args, **kwargs):
-        print(request.user.groups.all())
-        return Response(self.request.user.groups.filter(name="author"), status=status.HTTP_200_OK)
+
+class AuthorProfileAPI(AuthorUserMixin, RetrieveAPIView):
+    serializer_class = ProfileSerializer
+
+    def get_object(self):
+        return Profile.objects.get(user=self.request.user)

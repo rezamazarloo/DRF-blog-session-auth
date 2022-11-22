@@ -5,4 +5,4 @@ from .models import Profile
 class ProfileSerializer(serializers.Serializer):
     class Meta:
         model = Profile
-        fields = "__all__"
+        fields = ["image", "about", "birthDate"]
